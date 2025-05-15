@@ -199,6 +199,26 @@ return {
 				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
 				["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
 				["<C-y>"] = cmp.mapping.confirm({ select = true }),
+
+				-- Add Enter key to confirm selection
+				["<CR>"] = cmp.mapping.confirm({ select = true }),
+
+				-- Add Tab and Shift-Tab to navigate items (optional, but common)
+				["<Tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_next_item()
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
+				["<S-Tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_prev_item()
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
+
 				["<C-Space>"] = cmp.mapping.complete(),
 			}),
 			sources = cmp.config.sources({
